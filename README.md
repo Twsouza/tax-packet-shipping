@@ -4,7 +4,7 @@ Tax Packet Shipping is an API to calculate and track shipping tax from a packet/
 
 ## Installation
 
-Tax Packet Shipping requires [Golang](https://golang.org/) 1.11+ to run.
+Tax Packet Shipping requires [Golang](https://golang.org/) 1.11  to run.
 
 We use Go Modules so all you got do is.
 
@@ -31,7 +31,10 @@ $ docker-compose up -d --build
 
 Tax Packet Shipping uses a fewer dependecies, here are what we used it.
 
-| Dependecie |
+| Dependecies |
 | ------ |
 | [Gorilla Mux](https://github.com/gorilla/mux/) |
 | [MongoDB Driver](https://godoc.org/go.mongodb.org/mongo-driver/mongo) |
+
+### Git Flow
+It was used "Git Flow" to organize development flow. [See here how to use it.](https://medium.com/@muneebsajjad/git-flow-explained-quick-and-simple-7a753313572f)
