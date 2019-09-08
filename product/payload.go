@@ -8,4 +8,5 @@ type Payload struct {
 	Width  float64 `json:"width"`
 	Weight int     `json:"weight"`
 	Price  float64 `json:"price"`
+	Tax    float64 `json:"tax,omitempty"`
 }
