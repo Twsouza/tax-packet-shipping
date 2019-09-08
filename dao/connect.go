@@ -12,14 +12,13 @@ import (
 // connect to the database
 func connect() (*mongo.Client, error) {
 	var err error
-	client, err := mongo.NewClient(options.Client().ApplyURI(config.MongoHost))
+	client, err := mongo.NewClient(options.Client().ApplyURI(config.DbParams.Host))
 	if err != nil {
 		log.Println("Err db.connect->mongo.NewClient", err)
 		return nil, err
 	}
 
-	// TODO: config timeout
-	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), config.DbParams.TimeOut*time.Second)
 	defer cancel()
 	err = client.Connect(ctx)
 	if err != nil {

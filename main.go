@@ -11,6 +11,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/twsouza/tax-packet-shipping/app"
+	"github.com/twsouza/tax-packet-shipping/common"
 )
 
 func main() {
@@ -21,17 +22,20 @@ func main() {
 	r.HandleFunc("/track", app.TrackProd).Methods("POST")
 	r.HandleFunc("/track/{id}", app.GetTrack).Methods("GET")
 
-	// TODO: config time to graceful
+	config, err := common.GetConfig()
+	if err != nil {
+		log.Println("Err db.connect->common.GetConfig", err)
+	}
+
 	var wait time.Duration
-	flag.DurationVar(&wait, "graceful-timeout", time.Second*15, "the duration for which the server gracefully wait for existing connections to finish")
+	flag.DurationVar(&wait, "graceful-timeout", time.Second*config.ServerParams.GracefulTimeout, "the duration for which the server gracefully wait for existing connections to finish")
 	flag.Parse()
 
-	// TODO: config server
 	srv := &http.Server{
-		Addr:         "0.0.0.0:80",
-		WriteTimeout: time.Second * 15,
-		ReadTimeout:  time.Second * 15,
-		IdleTimeout:  time.Second * 60,
+		Addr:         config.ServerParams.Addr,
+		WriteTimeout: time.Second * config.ServerParams.WriteTimeout,
+		ReadTimeout:  time.Second * config.ServerParams.ReadTimeout,
+		IdleTimeout:  time.Second * config.ServerParams.IdleTimeout,
 		Handler:      r,
 	}
 

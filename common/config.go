@@ -5,12 +5,23 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"time"
 )
 
 // Config app
 type Config struct {
-	MongoHost    string `json:"mongo_host"`
-	DatabaseName string `json:"database_name"`
+	DbParams struct {
+		Host    string        `json:"host"`
+		Name    string        `json:"name"`
+		TimeOut time.Duration `json:"timeout"`
+	} `json:"database_params"`
+	ServerParams struct {
+		Addr            string        `json:"address"`
+		WriteTimeout    time.Duration `json:"write_timeout"`
+		ReadTimeout     time.Duration `json:"read_timeout"`
+		IdleTimeout     time.Duration `json:"idle_timeout"`
+		GracefulTimeout time.Duration `json:"graceful_timeout"`
+	} `json:"server_params"`
 }
 
 // GetConfig from file

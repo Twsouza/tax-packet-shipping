@@ -1,0 +1,15 @@
+version: '2'
+
+services: 
+  api:
+    build:
+      context: .
+    ports:
+      - '80:80'
+  db:
+    image: mongo:3.4.22-xenial
+    volumes: 
+      - tax-packet:/data/db
+
+volumes: 
+  tax-packet:
