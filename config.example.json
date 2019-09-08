@@ -1,5 +1,5 @@
 {
-	"mongo_host": "mongodb://localhost:27017",
+	"mongo_host": "mongodb://db:27017",
 	"database_name": "tax-packet",
 	"server_params": {
 		"address": "0.0.0.0:80",
