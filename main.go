@@ -18,11 +18,14 @@ func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/tax", app.CalcProdTax).Methods("POST")
+	r.HandleFunc("/track", app.TrackProd).Methods("POST")
 
+	// TODO: config time to graceful
 	var wait time.Duration
 	flag.DurationVar(&wait, "graceful-timeout", time.Second*15, "the duration for which the server gracefully wait for existing connections to finish")
 	flag.Parse()
 
+	// TODO: config server
 	srv := &http.Server{
 		Addr:         "0.0.0.0:80",
 		WriteTimeout: time.Second * 15,
@@ -35,7 +38,7 @@ func main() {
 	// Run our server in a goroutine so that it doesn't block.
 	go func() {
 		if err := srv.ListenAndServe(); err != nil {
-			log.Println(err)
+			log.Println("err on server", err)
 		}
 	}()
 
