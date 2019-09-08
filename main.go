@@ -19,6 +19,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/tax", app.CalcProdTax).Methods("POST")
 	r.HandleFunc("/track", app.TrackProd).Methods("POST")
+	r.HandleFunc("/track/{id}", app.GetTrack).Methods("GET")
 
 	// TODO: config time to graceful
 	var wait time.Duration

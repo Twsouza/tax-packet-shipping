@@ -7,6 +7,7 @@ import (
 
 	"github.com/twsouza/tax-packet-shipping/common/response"
 	"github.com/twsouza/tax-packet-shipping/product"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // TrackProd endpoint to calc and show a tax from a product
@@ -16,6 +17,11 @@ func TrackProd(w http.ResponseWriter, r *http.Request) {
 	if err := json.NewDecoder(r.Body).Decode(p); err != nil {
 		log.Println("Incorrect json payload", err)
 		response.InvalidJSON(w)
+		return
+	}
+
+	if p.ID != primitive.NilObjectID {
+		response.Unsucessful(http.StatusForbidden, "Cannot save a track with ID", p, w)
 		return
 	}
 
