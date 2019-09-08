@@ -8,7 +8,7 @@ import (
 // FindOne find one doc within a collection, given a filter
 func FindOne(collection string, filter interface{}, doc interface{}) error {
 	client, err := connect()
-	db := client.Database(config.DatabaseName)
+	db := client.Database(config.DbParams.Name)
 	defer client.Disconnect(context.Background())
 
 	log.Println("FindOne db connect err", err)

@@ -10,7 +10,7 @@ import (
 func Insert(collection string, doc interface{}) (interface{}, error) {
 	// connect it to db
 	client, err := connect()
-	db := client.Database(config.DatabaseName)
+	db := client.Database(config.DbParams.Name)
 	defer client.Disconnect(context.Background())
 
 	if err != nil {
